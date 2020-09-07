@@ -1,9 +1,10 @@
 import layoutHome from '@/views/core/layoutHome.vue'
+import RouterView from '@/views/core/routerView.vue'
 import userRouter from './user.js'
-// const meta = {
-//     requiresAuth: false,
-//     keepAlive: false
-// }
+const meta = {
+    requiresAuth: false,
+    keepAlive: false
+}
 export const rotuerMapList=[
     {
         path: "*",
@@ -11,23 +12,32 @@ export const rotuerMapList=[
         hidden: true,
     },
     {
-        path:'/',
-        component:layoutHome
-    },
-    {
         path:'/home',
-        component:layoutHome
+        component:layoutHome,
+        hidden:true,
+        redirect:'/home/default',
+        children:[
+            {path:'/home/default', hidden:true,name:'default',meta:{title:'首页',component:()=>import('@/views/defaultHome/index')}}
+        ]
     },
     {
-        path:'/login',
-        component:()=>import('@/views/core/login.vue')
+        path:'/',
+        redirect:{path:'/home'},
+        component:layoutHome,
+        hidden:true,
+        children:[
+            {
+                path:'/settingCenter',
+                name:'settingCenter',
+                redirect:'/setting-user',
+                component:RouterView,
+                hidden:true,
+                meta:{title:'设置中心',icon:''},
+                children:(pre=>[
+                    {path:'/setting/user',name:`${pre}user`,component:()=>import('@/views/pages/setting/userConter'),meta:{...meta,title:'用户中心'}}
+                ])('setting-')
+            }
+        ]
     },
     ...userRouter
 ]
-//后期用于校验
-// export const loginRouterMap=[
-//     {
-//         path:'/login',
-//         component:'@/views/core/login.vue'
-//     }
-// ]

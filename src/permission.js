@@ -14,7 +14,6 @@ router.beforeEach((to,from,next)=>{
     }
     else{
         //next('/login')造成死循环
-        //改进的后
         if(to.path=='/login'){
             //重新触发的时候回进入到这里,然后直接跳转到登录页
             next()
