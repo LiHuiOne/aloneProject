@@ -1,6 +1,8 @@
 <template>
-    <div>
-        首页
+    <div class="page_container">
+        <header>头部</header>
+        <aside>左面</aside>
+        <router-view></router-view>
     </div>
 </template>
 

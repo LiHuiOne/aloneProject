@@ -4,8 +4,10 @@ import 'nprogress/nprogress.css'
 router.beforeEach((to,from,next)=>{
     //页面加载进度条加载动画
     NProgress.start()
+    console.log(from)
+    console.log(to)
+    localStorage.setItem('userInfo','admin')
     if(localStorage.getItem('userInfo')){
-        //已登录去首页
         if(to.path=='/login'){
             next({path:'/'})
         }else{

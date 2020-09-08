@@ -12,32 +12,30 @@ export const rotuerMapList=[
         hidden: true,
     },
     {
-        path:'/home',
+        path:'/',
         component:layoutHome,
-        hidden:true,
         redirect:'/home/default',
         children:[
-            {path:'/home/default', hidden:true,name:'default',meta:{title:'首页',component:()=>import('@/views/defaultHome/index')}}
-        ]
-    },
-    {
-        path:'/',
-        redirect:{path:'/home'},
-        component:layoutHome,
-        hidden:true,
-        children:[
+            {
+                path:'/home/default',
+                redirect:'index',
+                component:RouterView,
+                children:[
+                    {path:'/index',component:()=>import('@/views/defaultHome/index'),meta:{...meta,title:'首页'}}
+                ]
+            },
             {
                 path:'/settingCenter',
                 name:'settingCenter',
-                redirect:'/setting-user',
                 component:RouterView,
-                hidden:true,
+                redirect:'/setting/user',
                 meta:{title:'设置中心',icon:''},
                 children:(pre=>[
                     {path:'/setting/user',name:`${pre}user`,component:()=>import('@/views/pages/setting/userConter'),meta:{...meta,title:'用户中心'}}
                 ])('setting-')
-            }
+            },
         ]
     },
+    //登录页只能单独放置。否则不能把整个内容(首页)覆盖掉
     ...userRouter
 ]
