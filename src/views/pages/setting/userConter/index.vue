@@ -1,15 +1,11 @@
 <template>
-    <div>
-        用户设置中心
-    </div>
+  <div>
+    用户设置中心
+  </div>
 </template>
 
 <script>
-    export default {
-        
-    }
+export default {};
 </script>
 
-<style scoped>
-
-</style>
+<style scoped></style>
