@@ -27,6 +27,7 @@
 <script>
 //引入加密
 import { JSEncrypt } from "jsencrypt";
+import { mapActions } from 'vuex'
 export default {
   data() {
     return {
@@ -39,17 +40,29 @@ export default {
     };
   },
   methods: {
-    async onSubmit() {
+    ...mapActions(['Login']),
+    onSubmit() {
+      //使用解构赋值，获取mapActions中的Login
+      let {
+        Login
+      }=this
       const publicKey =
         "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAu+2NFLhWUYloFqNXubILIEhNoAEoNyIccqaNOLnS1E8qay/kJB3fAmFTtJVhQpTciNZFhfORhdUljAfN/xFi9Wb2l1lDUK24vqIe/XXFwkLJWOENo32lfYhS+YtEzw+fhhPC/aqGaTYpKa5bCqob3AfWWRuFGEuBqNdy+29VLHVBaLsOdDglGvBf3F3UbygLHAKXyFa1ozdXa+iKAlOxyGZd1bATwvuK3lBk/H1tbRFFmqI2thujl1jAFNx4dL8KEG62YAlMAI5Xhq3CnNfvufKoOZTr16fT54uwX6R69nv6RriuOinNokOHsqOU28qWMZP3uDuwLi/WzrJJSSBiJQIDAQAB";
       const params = {
         account: this.form.account,
         password: this.encryptedData(publicKey, this.form.pwd),
         code: this.form.code
-	  };
-	  console.log(params)
-      const reData = await this.$api.userLogin(params);
-      console.log(reData);
+      };
+      Login(params)
+      .then(response=>
+        console.log("登录成功"+response)
+      )
+      .catch(err=>
+        console.log('登录失败'+err)
+      )
+      .finally(()=>{
+        console.log("111")
+      })
     },
     //密码加密,先安装npm install jsencrypt --dev
     encryptedData(publicKey, data) {
