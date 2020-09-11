@@ -1,4 +1,5 @@
 //使用Gzip压缩，提高加载速度
+//npm install --save-dev compression-webpack-plugin
 const CompressionWebpackPlugin = require('compression-webpack-plugin');
 
 const externals = {
