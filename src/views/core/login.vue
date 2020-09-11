@@ -59,18 +59,18 @@ export default {
         code: this.form.code
       };
       //测试vuex中的mutation
-      this.status=!this.status
-      this.TOOGLE_ASIDE(this.status)
-      // Login(params)
-      // .then(response=>
-      //   console.log("登录成功"+response)
-      // )
-      // .catch(err=>
-      //   console.log('登录失败'+err)
-      // )
-      // .finally(()=>{
-      //   console.log("111")
-      // })
+      // this.status=!this.status
+      // this.TOOGLE_ASIDE(this.status)
+      Login(params)
+      .then(response=>
+        console.log("登录成功"+response)
+      )
+      .catch(err=>
+        console.log('登录失败'+err)
+      )
+      .finally(()=>{
+        console.log("111")
+      })
     },
     //密码加密,先安装npm install jsencrypt --dev
     encryptedData(publicKey, data) {
