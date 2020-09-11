@@ -3,9 +3,9 @@
 //可以利用对象的形式进行获取
 //import {userLogin} from '@/http/login.js'
 import userApi from '@/http/login.js'
-const user={
+const users={
     state:{
-        userInfo:{},//个人信息
+        userInfo:{name:'ce'},//个人信息
         roleList:[],
         actionList:[]
     },
@@ -32,4 +32,4 @@ const user={
         }
     }
 }
-export default user
+export default users

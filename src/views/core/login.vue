@@ -7,7 +7,7 @@
       <el-form-item label="密码">
         <el-input v-model="form.pwd"></el-input>
       </el-form-item>
-      <el-form-item label="验证码">
+      <el-form-item label="验证码" v-show="aisdeCollape">
         <el-row :gutter="10">
           <el-col :span="6">
             <el-input v-model="form.code"></el-input>
@@ -27,7 +27,7 @@
 <script>
 //引入加密
 import { JSEncrypt } from "jsencrypt";
-import { mapActions } from 'vuex'
+import { mapActions, mapMutations, mapGetters} from 'vuex'
 export default {
   data() {
     return {
@@ -36,11 +36,16 @@ export default {
         pwd: "",
         code: ""
       },
-      src: ""
+      src: "",
+      status:false
     };
+  },
+  computed:{
+    ...mapGetters(['aisdeCollape','userInfo'])
   },
   methods: {
     ...mapActions(['Login']),
+    ...mapMutations(['TOOGLE_ASIDE']),
     onSubmit() {
       //使用解构赋值，获取mapActions中的Login
       let {
@@ -53,16 +58,19 @@ export default {
         password: this.encryptedData(publicKey, this.form.pwd),
         code: this.form.code
       };
-      Login(params)
-      .then(response=>
-        console.log("登录成功"+response)
-      )
-      .catch(err=>
-        console.log('登录失败'+err)
-      )
-      .finally(()=>{
-        console.log("111")
-      })
+      //测试vuex中的mutation
+      this.status=!this.status
+      this.TOOGLE_ASIDE(this.status)
+      // Login(params)
+      // .then(response=>
+      //   console.log("登录成功"+response)
+      // )
+      // .catch(err=>
+      //   console.log('登录失败'+err)
+      // )
+      // .finally(()=>{
+      //   console.log("111")
+      // })
     },
     //密码加密,先安装npm install jsencrypt --dev
     encryptedData(publicKey, data) {
