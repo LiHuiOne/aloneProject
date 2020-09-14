@@ -5,7 +5,7 @@
 import userApi from '@/http/login.js'
 const users={
     state:{
-        userInfo:{name:'ce'},//个人信息
+        userInfo:{},//个人信息
         roleList:[],
         actionList:[]
     },
@@ -27,6 +27,25 @@ const users={
                     resolve(response)
                 }).catch(error => {
                     reject(error)
+                })
+            })
+        },
+        GetInfo({ commit }){
+            return new Promise((resolve,reject)=>{
+                userApi.getUserInfo().then(res=>{
+                    let userInfo =res.datas.content||{}
+                    const {menuList,actionList} = userInfo
+                    if(menuList&&menuList.length>0){
+                        commit('SET_USERINFO',userInfo)
+                        commit('SET_ROLEINFO',menuList)
+                        commit('SET_ACTIONS',actionList)
+                    }
+                    else {
+                        reject(new Error('getInfo: roles must be a non-null array !'))
+                    }
+                    resolve(userInfo)
+                }).catch(err=>{
+                    reject(err)
                 })
             })
         }

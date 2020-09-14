@@ -1,17 +1,33 @@
 import router from "./router";
 import NProgress from "nprogress";
 import "nprogress/nprogress.css";
+import store from './store'
 router.beforeEach((to, from, next) => {
   //页面加载进度条加载动画
   NProgress.start();
   // console.log(from)
   // console.log(to)
-  localStorage.setItem("userInfo", "admin");
   if (localStorage.getItem("userInfo")) {
     if (to.path == "/login") {
       next({ path: "/" });
     } else {
-      next();
+      //判断vuex是否具有权限数据
+      if(store.getters.roleList.length==0){
+        store.dispatch('GetInfo').then(res=>{
+          const menuList=["settingCenter","userManage","dataCenter","riskData"]
+          store.dispatch('GenerateRoutes', { roles:menuList }).then(() => {
+              // 根据roles权限生成可访问的路由表
+              // 动态添加可访问路由表
+              router.addRoutes(store.getters.addRouters)
+              //console.log(store.getters.addRouters)
+
+          }).catch((e) => { 
+          });
+        })
+      }else{
+        next();
+      }
+      
     }
   } else {
     //next('/login')造成死循环

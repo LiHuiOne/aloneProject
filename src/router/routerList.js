@@ -19,6 +19,7 @@ export const rotuerMapList = [
       {
         path: "/home/default",
         redirect: "/index",
+        name:'index',
         component: RouterView,
         children: [
           {
@@ -32,8 +33,7 @@ export const rotuerMapList = [
         path: "/settingCenter",
         name: "settingCenter",
         component: RouterView,
-        redirect: "/setting/userManage",
-        meta: { title: "设置中心", icon: "" },
+        meta: { title: "设置中心", icon: "",permission:['settingCenter']},
         children: (pre => [
           {
             path: "/setting/userManage",
@@ -53,8 +53,7 @@ export const rotuerMapList = [
         path: "/dataCenter",
         name: "dataCenter",
         component: RouterView,
-        redirect: "/dataCenter/risk",
-        meta: { title: "数据中心", icon: "" },
+        meta: { title: "数据中心", icon: "",permission:['dataCenter']},
         children: (pre => [
           {
             path: "/dataCenter/risk",
@@ -75,3 +74,10 @@ export const rotuerMapList = [
   //登录页只能单独放置。否则不能把整个内容(首页)覆盖掉
   ...userRouter
 ];
+export const userLoginMap = [
+  {
+      path: '/login',
+      name: 'login',
+      component: () => import('@/views/core/login')
+  }
+]

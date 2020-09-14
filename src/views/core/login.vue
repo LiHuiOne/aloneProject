@@ -7,13 +7,13 @@
       <el-form-item label="密码">
         <el-input v-model="form.pwd"></el-input>
       </el-form-item>
-      <el-form-item label="验证码" v-show="aisdeCollape">
+      <el-form-item label="验证码">
         <el-row :gutter="10">
           <el-col :span="6">
             <el-input v-model="form.code"></el-input>
           </el-col>
           <el-col :span="6">
-            <img :src="this.src" alt="" style="width:60px;height:30px" />
+            <img :src="this.src" @click="getCode" style="width:60px;height:30px" />
           </el-col>
         </el-row>
       </el-form-item>
@@ -43,6 +43,9 @@ export default {
   computed:{
     ...mapGetters(['aisdeCollape','userInfo'])
   },
+  created(){
+    this.getCode()
+  },
   methods: {
     ...mapActions(['Login']),
     ...mapMutations(['TOOGLE_ASIDE']),
@@ -62,26 +65,25 @@ export default {
       // this.status=!this.status
       // this.TOOGLE_ASIDE(this.status)
       Login(params)
-      .then(response=>
-        console.log("登录成功"+response)
-      )
-      .catch(err=>
-        console.log('登录失败'+err)
-      )
-      .finally(()=>{
-        console.log("111")
+      .then((res)=>{
+        if(res.success){
+          localStorage.setItem('userInfo','islogin')
+          this.$router.push({name:'index'})
+        }
       })
+      .finally(()=>{console.log("登录完成")})
+     
     },
     //密码加密,先安装npm install jsencrypt --dev
     encryptedData(publicKey, data) {
       let encrypt = new JSEncrypt();
       encrypt.setPublicKey(publicKey);
       return encrypt.encrypt(data);
+    },
+    getCode(){
+      var timestamp = new Date().valueOf();
+      this.src = "/api/login/code?" + timestamp;
     }
-  },
-  created() {
-    var timestamp = new Date().valueOf();
-    this.src = "/api/login/code?" + timestamp;
   }
 };
 </script>

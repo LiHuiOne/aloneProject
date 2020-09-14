@@ -6,6 +6,8 @@ const getters={
     //user
     userInfo:state=>state.users.userInfo,
     roleList:state=>state.users.roleList,
-    actionList:state=>state.users.actionList
+    actionList:state=>state.users.actionList,
+    //permission
+    addRouters:state=>state.permission.addRouters
 }
 export default getters

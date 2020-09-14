@@ -6,6 +6,14 @@ const userLogin = data => {
     data
   });
 };
+const getUserInfo = ()=> {
+  return axios({
+      url: '/api/currentuser',
+      method: 'get',
+  })
+}
+
 export default {
-  userLogin
+  userLogin,
+  getUserInfo
 };
