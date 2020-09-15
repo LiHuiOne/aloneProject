@@ -7,7 +7,7 @@ const systemConfig = {
     mutations:{
         [type.TOOGLE_ASIDE](state,aisdeCollape){
             state.aisdeCollape=aisdeCollape
-            
+            state.leftAsideWidth=aisdeCollape?'64':'190'
         },
         [type.SET_THEME](state,theme){
             state.theme=theme

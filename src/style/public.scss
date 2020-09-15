@@ -1,0 +1,43 @@
+html,body {
+    height: 100%;
+    font-size: 12px;
+    //字体抗锯齿,使用后字体看起来会更清晰舒服
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-font-smoothing: antialiased;
+    //当绘制文本时，浏览器会侧重文本的可读性（清晰度），而不是渲染速度和几何 精度。该属性值可以用于字距调整和连字。
+    text-rendering: optimizeLegibility;
+    font-family: PingFang SC, Helvetica Neue, Helvetica, Hiragino Sans GB, Microsoft YaHei, Arial, sans-serif;
+}
+.el-menu{
+    border-right:none !important;
+    background: rgba(66, 72, 91, 0.5) !important;
+    .el-submenu{
+        .el-submenu__title{
+            // padding-left: 40px !important;
+            .el-icon-menu{
+                color:#ffffff;
+            }
+            span{
+                color:#ffffff;
+            }
+        }
+        //解决二级菜单左侧多出部分
+        .el-menu-item{
+            min-width:0px;
+            padding-left: 45px !important;
+        }
+        //二级菜单悬停背景
+        .el-menu-item:hover{
+            background:#f36c28;
+        }
+        .el-submenu__title:hover{
+            background: rgba(66, 72, 91, 0.5);
+        }
+    }
+    .el-menu-item-group__title{
+        display: none;
+    }
+    a{
+        color:#ffffff;
+    }
+}

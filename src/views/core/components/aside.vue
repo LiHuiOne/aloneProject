@@ -2,7 +2,7 @@
    <el-menu class="el-menu-vertical-demo" :collapse="aisdeCollape">
     <el-submenu v-for="item in menusList" :index="item.path" :key="item.path">
         <template slot="title">
-            <i class="el-icon-location"></i>
+            <i class="el-icon-menu"></i>
             <span slot="title">{{item.meta.title}}</span>
         </template>
         <el-menu-item-group v-show="item.children">
@@ -46,7 +46,7 @@ import {mapGetters} from 'vuex'
 
 <style scoped>
  .el-menu-vertical-demo:not(.el-menu--collapse) {
-    width: 200px;
-    min-height: 400px;
+    width: 190px;
+    /* min-height: 400px; */
   }
 </style>
