@@ -5,7 +5,14 @@
         <img :src="imgSrc" alt="">
       </div>
       <div class="header_right">
-
+          <el-dropdown>
+            <span class="el-dropdown-link">
+              小灰灰<i class="el-icon-arrow-down el-icon--right"></i>
+            </span>
+            <el-dropdown-menu slot="dropdown">
+              <el-dropdown-item v-for="item in downMenuList" :key="item.index" @click.native="choosed(item)">{{item.name}}</el-dropdown-item>
+            </el-dropdown-menu>
+          </el-dropdown>
       </div>
     </div>
     <div class="container_mian">
@@ -35,6 +42,7 @@ export default {
     return {
       asideWidth:'190',
       menus:[],
+      downMenuList:[{name:'前台管理',index:'0'},{name:'后台管理',index:'1'}],
       imgSrc:require("@/assets/images/lg-logo.png")
     }
   },
@@ -59,6 +67,9 @@ export default {
     ...mapMutations(['TOOGLE_ASIDE']),
     toggleAside(){
       this.TOOGLE_ASIDE(!this.aisdeCollape)
+    },
+    choosed(item){
+      console.log(item)
     }
   }
 };
@@ -86,6 +97,11 @@ export default {
         height: 100%;
         //background-image:linear-gradient(to right, red, yellow, blue, green);
         background:#f36c28;
+        .el-dropdown{
+          float: right;
+          line-height: 50px;
+          margin-right: 20px;
+        }
       }
     }
     .container_mian{

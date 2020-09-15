@@ -8,6 +8,7 @@ html,body {
     text-rendering: optimizeLegibility;
     font-family: PingFang SC, Helvetica Neue, Helvetica, Hiragino Sans GB, Microsoft YaHei, Arial, sans-serif;
 }
+//侧边的菜单
 .el-menu{
     border-right:none !important;
     background: rgba(66, 72, 91, 0.5) !important;
@@ -41,8 +42,17 @@ html,body {
         color:#ffffff;
     }
 }
+//顶部的菜单
 .el-tag{
     background: #ecf5ff;
     border-color: #d9ecff;
     
+}
+//顶部的右侧的下拉选项
+.el-dropdown-link {
+    cursor: pointer;
+    color: #ffffff;
+}
+.el-icon-arrow-down {
+    font-size: 12px;
 }
