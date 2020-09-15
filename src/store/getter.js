@@ -3,6 +3,7 @@ const getters={
     leftAsideWidth:state=>state.systemConfig.leftAsideWidth,
     aisdeCollape:state=>state.systemConfig.aisdeCollape,
     theme:state=>state.systemConfig.theme,
+    menuList:state=>state.systemConfig.menuList,
     //user
     userInfo:state=>state.users.userInfo,
     roleList:state=>state.users.roleList,

@@ -7,7 +7,7 @@
         </template>
         <el-menu-item-group v-show="item.children">
             <el-menu-item :index="item.path" v-for="subItem in item.children" :key="subItem.path">
-             <router-link :to="subItem.path">{{subItem.meta.title}}</router-link>
+             <router-link :to="subItem.path" @click.native="saveChooedMenu(subItem)">{{subItem.meta.title}}</router-link>
             </el-menu-item>
         </el-menu-item-group>
     </el-submenu>
@@ -15,7 +15,7 @@
 </template>
 
 <script>
-import {mapGetters} from 'vuex'
+import {mapGetters,mapMutations} from 'vuex'
     export default {
     data() {
       return {
@@ -40,6 +40,11 @@ import {mapGetters} from 'vuex'
 
     },
     methods: {
+        ...mapMutations(['SET_HMENU']),
+        saveChooedMenu(menuInfo){
+            let menu={path:menuInfo.path,title:menuInfo.meta.title}
+            this.SET_HMENU(menu)
+        }
     }
   }
 </script>

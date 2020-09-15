@@ -16,6 +16,10 @@
         <aside-left :menus="menus" :asideWidth="asideWidth"></aside-left>
       </div>
       <div class="container_right" :style="{left:aisdeCollape?leftAsideWidth:asideWidth}">
+        <div class="header_menu">
+          <header-menu></header-menu>
+        </div>
+        
         <router-view></router-view>
       </div>
     </div>
@@ -35,7 +39,8 @@ export default {
     }
   },
   components:{
-    'aside-left': () => import("./components/aside")
+    'aside-left': () => import("./components/aside"),
+    'header-menu':() => import('./components/header-menu')
   },
   computed:{
     ...mapGetters(['addRouters','aisdeCollape','leftAsideWidth']),
@@ -93,6 +98,7 @@ export default {
           text-align: center;
           line-height: 40px;
           span{
+            cursor: pointer;
             font-size: 20px;
             color: #ffffff;
           }
@@ -103,6 +109,14 @@ export default {
         width: calc(100% - 0px);
         // height: 100%;
         //background:#f0f0f0;
+        .header_menu{
+          height: 40px;
+          background: #ffffff;
+          padding-left: 10px;
+          &>div{
+            line-height: 40px;
+          }
+        }
       }
     }
   }
