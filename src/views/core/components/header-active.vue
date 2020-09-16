@@ -33,6 +33,8 @@ import {mapMutations} from 'vuex'
                 localStorage.setItem('modeIndex',item.index)//将切换前后台的index放到localStorage
                 //this.TOOGLE_MANMODE(localStorage.getItem('modeIndex'))
                 //this.TOOGLE_MANMODE(item.index)
+                //跳转到首页
+                this.$router.push({path:'/'})
                 window.location.reload()
             }
         }

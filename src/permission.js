@@ -7,6 +7,8 @@ router.beforeEach((to, from, next) => {
   NProgress.start();
   // console.log(from)
   // console.log(to)
+  let modeIndex=localStorage.getItem('modeIndex')
+  //debugger
   if (localStorage.getItem("userInfo")) {
     if (to.path == "/login") {
       next({ path: "/" });
@@ -28,7 +30,6 @@ router.beforeEach((to, from, next) => {
 
         //通过Vuex模拟请求数据
         let menuList=[]
-        let modeIndex=localStorage.getItem('modeIndex')
           if(modeIndex==0){//前台管理权限
              menuList=["settingCenter","userManage","dataCenter","riskData"]
           }else{//后台管理权限
@@ -38,8 +39,6 @@ router.beforeEach((to, from, next) => {
               // 根据roles权限生成可访问的路由表
               // 动态添加可访问路由表
               router.addRoutes(store.getters.addRouters)
-              //console.log(store.getters.addRouters)
-
           }).catch((e) => {})
       }else{
         next();
@@ -57,7 +56,9 @@ router.beforeEach((to, from, next) => {
       next("/login");
     }
   }
-  next(); //一定要调用next(),否则会造成页面卡死在登录页
+  next(); //一定要调用next(),否则会造成页面卡死页面
+  
+  
 });
 router.afterEach(() => {
   NProgress.done(); //结束加载动画

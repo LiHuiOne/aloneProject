@@ -34,7 +34,11 @@ html,body {
         .el-submenu__title:hover{
             background: rgba(66, 72, 91, 0.5);
         }
+        .is-active{
+            background: #f36c28;
+        }
     }
+    
     .el-menu-item-group__title{
         display: none;
     }
