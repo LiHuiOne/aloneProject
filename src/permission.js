@@ -13,7 +13,8 @@ router.beforeEach((to, from, next) => {
     } else {
       //判断vuex是否具有权限数据
       if(store.getters.roleList.length==0){
-        store.dispatch('GetInfo').then(res=>{
+        //调用接口GetInfo获取当前登录信息
+        //store.dispatch('GetInfo').then(res=>{
           const menuList=["settingCenter","userManage","dataCenter","riskData"]
           store.dispatch('GenerateRoutes', { roles:menuList }).then(() => {
               // 根据roles权限生成可访问的路由表
@@ -23,7 +24,7 @@ router.beforeEach((to, from, next) => {
 
           }).catch((e) => { 
           });
-        })
+        //})
       }else{
         next();
       }

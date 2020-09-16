@@ -68,6 +68,46 @@ export const rotuerMapList = [
             meta: { ...meta, title: "车辆数据", permission: ["carData"] }
           }
         ])("dataCenter-")
+      },
+      {
+        path:'/formManage',
+        name:'formManage',
+        component:RouterView,
+        meta:{title:'表单管理',icon:'',permission:['formManage']},
+        children:(pre=>[
+          {
+            path:'/formManage/form',
+            name:`${pre}form`,
+            component:()=>import("@/views/pages/formManage/formData"),
+            meta:{...meta,title:'表单数据',permission:['formData']}
+          },
+          {
+            path:'/formManage/flow',
+            name:`${pre}flow`,
+            component:()=>import("@/views/pages/formManage/flowData"),
+            meta:{...meta,title:'流程数据',permission:['flowData']}
+          }
+        ])("formManage-")
+      },
+      {
+        path:'/systemManage',
+        name:'systemManage',
+        component:RouterView,
+        meta:{title:'系统管理',icon:'',permission:['systemManage']},
+        children:(pre=>[
+          {
+            path:'/systemManage/safe',
+            name:`${pre}safe`,
+            component:()=>import("@/views/pages/systemManage/safeData"),
+            meta:{...meta,title:'安全配置',permission:['safeData']}
+          },
+          {
+            path:'/systemManage/theme',
+            name:`${pre}theme`,
+            component:()=>import("@/views/pages/systemManage/themeData"),
+            meta:{...meta,title:'主题配置',permission:['themeData']}
+          }
+        ])("systemManage-")
       }
     ]
   },

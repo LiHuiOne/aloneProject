@@ -5,14 +5,9 @@
         <img :src="imgSrc" alt="">
       </div>
       <div class="header_right">
-          <el-dropdown>
-            <span class="el-dropdown-link">
-              小灰灰<i class="el-icon-arrow-down el-icon--right"></i>
-            </span>
-            <el-dropdown-menu slot="dropdown">
-              <el-dropdown-item v-for="item in downMenuList" :key="item.index" @click.native="choosed(item)">{{item.name}}</el-dropdown-item>
-            </el-dropdown-menu>
-          </el-dropdown>
+          <header-theme></header-theme>
+          <header-active></header-active>
+          <header-user></header-user>
       </div>
     </div>
     <div class="container_mian">
@@ -42,13 +37,15 @@ export default {
     return {
       asideWidth:'190',
       menus:[],
-      downMenuList:[{name:'前台管理',index:'0'},{name:'后台管理',index:'1'}],
       imgSrc:require("@/assets/images/lg-logo.png")
     }
   },
   components:{
     'aside-left': () => import("./components/aside"),
-    'header-menu':() => import('./components/header-menu')
+    'header-menu':() => import('./components/header-menu'),
+    'header-active':() => import('./components/header-active'),
+    'header-user':() => import('./components/header-user'),
+    'header-theme':() => import('./components/header-theme')
   },
   computed:{
     ...mapGetters(['addRouters','aisdeCollape','leftAsideWidth']),
@@ -67,9 +64,6 @@ export default {
     ...mapMutations(['TOOGLE_ASIDE']),
     toggleAside(){
       this.TOOGLE_ASIDE(!this.aisdeCollape)
-    },
-    choosed(item){
-      console.log(item)
     }
   }
 };
