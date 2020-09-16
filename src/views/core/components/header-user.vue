@@ -21,8 +21,10 @@
         },
         methods:{
             choosed(item){
-                //this.menuName=item.name
-                //console.log(item)
+                if(item.index==0){
+                    localStorage.clear()
+                    window.location.reload()
+                }
             }
         }
     }
