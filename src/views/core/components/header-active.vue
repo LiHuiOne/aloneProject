@@ -13,6 +13,7 @@
 </template>
 
 <script>
+import {mapMutations} from 'vuex'
     export default {
         data(){
             return{
@@ -21,12 +22,18 @@
             }
         },
         mounted(){
-            this.menuName=this.downMenuList[0].name
+            //this.menuName=this.downMenuList[0].name
+            this.menuName=localStorage.getItem('modeName')?localStorage.getItem('modeName'):this.downMenuList[0].name
         },
         methods:{
+            ...mapMutations(['TOOGLE_MANMODE']),
             choosed(item){
-                this.menuName=item.name
-                //console.log(item)
+                //this.menuName=item.name
+                localStorage.setItem('modeName',item.name)
+                localStorage.setItem('modeIndex',item.index)//将切换前后台的index放到localStorage
+                //this.TOOGLE_MANMODE(localStorage.getItem('modeIndex'))
+                //this.TOOGLE_MANMODE(item.index)
+                window.location.reload()
             }
         }
     }

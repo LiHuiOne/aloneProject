@@ -18,7 +18,7 @@
         <aside-left :menus="menus" :asideWidth="asideWidth"></aside-left>
       </div>
       <div class="container_right" :style="{left:aisdeCollape?leftAsideWidth:asideWidth}">
-        <div class="header_menu">
+        <div class="header_menu" v-if="menuList.length>0">
           <header-menu></header-menu>
         </div>
         
@@ -48,7 +48,7 @@ export default {
     'header-theme':() => import('./components/header-theme')
   },
   computed:{
-    ...mapGetters(['addRouters','aisdeCollape','leftAsideWidth']),
+    ...mapGetters(['addRouters','aisdeCollape','leftAsideWidth','menuList']),
     ...mapState({
       mainMenu:state=>state.permission.addRouters
     })

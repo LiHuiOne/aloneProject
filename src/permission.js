@@ -14,17 +14,33 @@ router.beforeEach((to, from, next) => {
       //判断vuex是否具有权限数据
       if(store.getters.roleList.length==0){
         //调用接口GetInfo获取当前登录信息
-        //store.dispatch('GetInfo').then(res=>{
-          const menuList=["settingCenter","userManage","dataCenter","riskData"]
+        // store.dispatch('GetInfo').then(res=>{
+        //   const menuList=["settingCenter","userManage","dataCenter","riskData"]
+        //   store.dispatch('GenerateRoutes', { roles:menuList }).then(() => {
+        //       // 根据roles权限生成可访问的路由表
+        //       // 动态添加可访问路由表
+        //       router.addRoutes(store.getters.addRouters)
+        //       //console.log(store.getters.addRouters)
+
+        //   }).catch((e) => { 
+        //   });
+        //})
+
+        //通过Vuex模拟请求数据
+        let menuList=[]
+        let modeIndex=localStorage.getItem('modeIndex')
+          if(modeIndex==0){//前台管理权限
+             menuList=["settingCenter","userManage","dataCenter","riskData"]
+          }else{//后台管理权限
+            menuList=["formManage","formData","flowData","systemManage","themeData"]
+          }
           store.dispatch('GenerateRoutes', { roles:menuList }).then(() => {
               // 根据roles权限生成可访问的路由表
               // 动态添加可访问路由表
               router.addRoutes(store.getters.addRouters)
               //console.log(store.getters.addRouters)
 
-          }).catch((e) => { 
-          });
-        //})
+          }).catch((e) => {})
       }else{
         next();
       }
