@@ -30,7 +30,7 @@ html,body {
         }
         //二级菜单悬停背景
         .el-menu-item:hover{
-            background:#f36c28;
+            background-color:#f36c28;
         }
         .el-submenu__title:hover{
             background: rgba(66, 72, 91, 0.5);
@@ -45,6 +45,10 @@ html,body {
     }
     a{
         color:#ffffff;
+    }
+    //二级菜单折叠时的背景
+    .el-menu-item:focus,.el-menu-item:hover{
+        background-color:#f36c28;
     }
 }
 //顶部的菜单

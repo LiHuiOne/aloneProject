@@ -121,6 +121,7 @@ export default {
       .container_right{
         //calc(100% - 0px)这样设置宽度是让当侧边栏收缩的时候右边的宽度还是占右面100%
         width: calc(100% - 0px);
+        padding:10px 14px;
         // height: 100%;
         //动态主页面背景颜色，默认是$background-color-theme1
         @include bg_color($background-color-theme1);
