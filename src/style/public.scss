@@ -101,3 +101,8 @@ html,body {
 .el-checkbox__input.is-checked+.el-checkbox__label{
     color:$check_txt !important;
 }
+//dropdown拉下菜单的样式
+.el-dropdown-menu__item:not(.is-disabled):hover{
+    background-color:#f36c28 !important;
+    color:#ffffff !important;
+  }
