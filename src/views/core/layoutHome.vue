@@ -1,11 +1,11 @@
 <template>
-  <div class="page_container base_bg">
+  <div class="page_container">
     <div class="header_top">
       <div class="logo">
         <img :src="imgSrc" alt="">
       </div>
       <div class="header_right">
-          <header-theme></header-theme>
+          <header-theme @toogleBgColor='toggleBg'></header-theme>
           <header-active></header-active>
           <header-user></header-user>
       </div>
@@ -64,6 +64,10 @@ export default {
     ...mapMutations(['TOOGLE_ASIDE']),
     toggleAside(){
       this.TOOGLE_ASIDE(!this.aisdeCollape)
+    },
+    toggleBg(bgColor){
+      //console.log(bgColor)
+       window.document.documentElement.setAttribute('data-theme',bgColor)
     }
   }
 };
@@ -118,7 +122,8 @@ export default {
         //calc(100% - 0px)这样设置宽度是让当侧边栏收缩的时候右边的宽度还是占右面100%
         width: calc(100% - 0px);
         // height: 100%;
-        //background:#f0f0f0;
+        //动态主页面背景颜色，默认是$background-color-theme1
+        @include bg_color($background-color-theme1);
         .header_menu{
           height: 40px;
           background: #ffffff;

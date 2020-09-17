@@ -16,7 +16,7 @@
     export default {
         data(){
             return{
-                downMenuList:[{name:'暗黑',index:'0'},{name:'淡灰',index:'1'}],
+                downMenuList:[{name:'默认',index:'theme1'},{name:'淡灰',index:'theme2'},{name:'淡墨绿',index:'theme3'}],
                 menuName:''
             }
         },
@@ -26,11 +26,12 @@
         methods:{
             choosed(item){
                 this.menuName=item.name
+                this.$emit('toogleBgColor',item.index)
                 //console.log(item)
             }
         }
     }
 </script>
 <style lang="scss" scoped>
-
+  
 </style>
