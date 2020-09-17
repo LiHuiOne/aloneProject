@@ -84,7 +84,7 @@ html,body {
     background:$btn_bg !important;
     border-color:$btn_bg !important;
 }
-//复选框的样式
+//复选框选中的样式
 .el-checkbox__input.is-checked .el-checkbox__inner, .el-checkbox__input.is-indeterminate .el-checkbox__inner{
     background-color: $checkBox_bg !important;
     border-color: $checkBox_bg !important;

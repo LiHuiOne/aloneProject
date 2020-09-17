@@ -38,13 +38,13 @@ export const rotuerMapList = [
           {
             path: "/setting/userManage",
             name: `${pre}userManage`,
-            component: () => import("@/views/pages/setting/userConter"),
+            component: () => import( /* webpackChunkName: "settingCenter" */ "@/views/pages/setting/userConter"),
             meta: { ...meta, title: "用户设置", permission: ["userManage"] }
           },
           {
             path: "/setting/roleManage",
             name: `${pre}roleManage`,
-            component: () => import("@/views/pages/setting/roleCenter"),
+            component: () => import( /* webpackChunkName: "settingCenter" */ "@/views/pages/setting/roleCenter"),
             meta: { ...meta, title: "角色设置", permission: ["roleManage"] }
           }
         ])("setting-")
@@ -58,13 +58,13 @@ export const rotuerMapList = [
           {
             path: "/dataCenter/risk",
             name: `${pre}risk`,
-            component: () => import("@/views/pages/dataCenter/riskData"),
+            component: () => import( /* webpackChunkName: "dataCenter" */ "@/views/pages/dataCenter/riskData"),
             meta: { ...meta, title: "风险数据", permission: ["riskData"] }
           },
           {
             path: "/dataCenter/car",
             name: `${pre}car`,
-            component: () => import("@/views/pages/dataCenter/carData"),
+            component: () => import( /* webpackChunkName: "dataCenter" */ "@/views/pages/dataCenter/carData"),
             meta: { ...meta, title: "车辆数据", permission: ["carData"] }
           }
         ])("dataCenter-")
@@ -78,13 +78,13 @@ export const rotuerMapList = [
           {
             path:'/formManage/form',
             name:`${pre}form`,
-            component:()=>import("@/views/pages/formManage/formData"),
+            component:()=>import( /* webpackChunkName: "formManage" */ "@/views/pages/formManage/formData"),
             meta:{...meta,title:'表单数据',permission:['formData']}
           },
           {
             path:'/formManage/flow',
             name:`${pre}flow`,
-            component:()=>import("@/views/pages/formManage/flowData"),
+            component:()=>import( /* webpackChunkName: "formManage" */ "@/views/pages/formManage/flowData"),
             meta:{...meta,title:'流程数据',permission:['flowData']}
           }
         ])("formManage-")
@@ -98,13 +98,13 @@ export const rotuerMapList = [
           {
             path:'/systemManage/safe',
             name:`${pre}safe`,
-            component:()=>import("@/views/pages/systemManage/safeData"),
+            component:()=>import( /* webpackChunkName: "systemManage" */ "@/views/pages/systemManage/safeData"),
             meta:{...meta,title:'安全配置',permission:['safeData']}
           },
           {
             path:'/systemManage/theme',
             name:`${pre}theme`,
-            component:()=>import("@/views/pages/systemManage/themeData"),
+            component:()=>import( /* webpackChunkName: "systemManage" */ "@/views/pages/systemManage/themeData"),
             meta:{...meta,title:'主题配置',permission:['themeData']}
           }
         ])("systemManage-")
