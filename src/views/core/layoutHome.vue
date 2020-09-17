@@ -2,7 +2,7 @@
   <div class="page_container">
     <div class="header_top">
       <div class="logo">
-        <img :src="imgSrc" alt="">
+        <img :src="imgSrc" alt="" @click="goPageIndex">
       </div>
       <div class="header_right">
           <header-theme @toogleBgColor='toggleBg'></header-theme>
@@ -61,13 +61,21 @@ export default {
   },
   methods:{
     //点击图标进行菜单缩放
-    ...mapMutations(['TOOGLE_ASIDE']),
+    ...mapMutations(['TOOGLE_ASIDE','DELETE_ALLMENU']),
     toggleAside(){
       this.TOOGLE_ASIDE(!this.aisdeCollape)
     },
     toggleBg(bgColor){
       //console.log(bgColor)
        window.document.documentElement.setAttribute('data-theme',bgColor)
+    },
+    goPageIndex(){
+      this.DELETE_ALLMENU();//删除所有的vuex里的顶部菜单
+      //点击图标会跳转到首页，但是会出现卡顿，后期优化
+      this.$router.push({path:'/'})
+      setTimeout(() => {
+         window.location.reload()
+      }, 50);
     }
   }
 };
@@ -88,6 +96,7 @@ export default {
         img{
           height: 100%;
           width: 100%;
+          cursor: pointer;
         }
       }
       .header_right{

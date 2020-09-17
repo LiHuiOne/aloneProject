@@ -27,6 +27,10 @@ const systemConfig = {
         [type.DELETE_HMENU](state,menu){
             state.menuList.splice(state.menuList.indexOf(menu),1)
         },
+        //点击logo的时候清空所有的顶部菜单
+        [type.DELETE_ALLMENU](state){
+            state.menuList=[];
+        },
         //切换顶部的管理类型，//已弃用，用localStorage
         [type.TOOGLE_MANMODE](state,type){
             state.modeIndex=type
