@@ -1,0 +1,8 @@
+//此文件用于进行样式覆盖
+.wrap_container{
+    .el-scrollbar{
+        .el-collapse{
+          width: 93% !important;
+        }
+    }
+}

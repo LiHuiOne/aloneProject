@@ -1,6 +1,6 @@
 <template>
     <div>
-       <div id="myChart" :style="{width: '82%;', height: '240px'}"></div>
+       <div id="myChart" :style="{width: '82%;', height: '230px'}"></div>
     </div>
 </template>
 <script>
@@ -40,8 +40,8 @@ import echarts from '@/units/echarts'
                     legend: {
                         
                     },
-                    grid:[
-                        {   x:'6%', y: '10%', width:'90%', height: '60%',
+                    grid:[//设置显示区的宽和高，和横纵轴的偏移
+                        {   x:'6%', y: '10%', width:'90%', height: '80%',
                             //backgroundColor: 'rgba(0,0,0,0)'
                             //borderWidth: 1,
                             //borderColor: '#000'
