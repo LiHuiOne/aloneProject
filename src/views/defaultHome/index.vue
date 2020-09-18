@@ -54,7 +54,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-  .wrap_container{
-    height: 270px;
-  }
+.wrap_container{
+  height: 270px;
+}
 </style>
