@@ -120,3 +120,22 @@ html,body {
 //     width: 110%;  //隐藏侧边默认滚动条 （达不到效果可以自己试着微调） 如解决不了可尝试用 `margin-right -60px`
 //     height: 110% !important;  //隐藏底部滚动条  （100%如果达不到效果可以试着用110%）   
 // }
+//月份日期选择器样式
+//文本框样式
+.el-range-editor.is-active, .el-range-editor.is-active:hover{
+    border-color:#f36c28;
+}
+// .el-month-table td .cell:hover{
+//     color:#f36c28 !important;
+// }
+.el-month-table td.today .cell {
+    color:#f36c28 !important;
+}
+.el-month-table td.today .cell:hover {
+    color:#ffffff !important;
+}
+
+.el-month-table td.end-date .cell, .el-month-table td.start-date .cell {
+    background-color: #f36c28 !important;
+    color:#ffffff;
+}
