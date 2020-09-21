@@ -54,7 +54,10 @@
                 this.$emit('search')
             },
             reset(){
-
+                this.initData.forEach(item=>{
+                    this.$set(this.formData,item.key,item.value||'')
+                })
+                this.initSearch()
             },
             //获取填写的搜索条件
             getFormData(){
