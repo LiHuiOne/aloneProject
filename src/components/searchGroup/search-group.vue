@@ -21,7 +21,7 @@
               </el-form-item>
             </el-form>
         </div>
-        <div class="btn_container" :style="initData.length>5?'margin-top:-50px;':''">
+        <div class="btn_container" :style="initData.length!=5?'margin-top:-50px;':''">
             <el-button type="primary" @click="searchInfo">查询</el-button>
             <el-button type="primary" @click="reset">重置</el-button>
         </div>
