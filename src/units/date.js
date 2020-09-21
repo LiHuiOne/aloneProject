@@ -27,3 +27,31 @@ export const dateconvert = (time) => {
     let seconds = Math.round((timeStr % (1000 * 60)) / 1000);
     return days + "天" + hours + "小时" + minutes + "分钟" + seconds + "秒";
 }
+//时间格式化3
+//调用方式
+// let d = new Date();
+// console.log(formatDate(d, 'yyyy-MM-dd')); // 2020-09-18
+// console.log(formatDate(d, 'yyyy:MM:dd')); // 2020:09:18
+// console.log(formatDate(d, 'yyyy-MM-dd hh:mm')); // 2020-09-18 17:26
+export const formatDate=(value, fmt)=> {
+  let getDate = new Date(value);
+  let o = {
+    'M+': getDate.getMonth() + 1,
+    'd+': getDate.getDate(),
+    'h+': getDate.getHours(),
+    'm+': getDate.getMinutes(),
+    's+': getDate.getSeconds(),
+    'q+': Math.floor((getDate.getMonth() + 3) / 3),
+    'S': getDate.getMilliseconds()
+  };
+  if (/(y+)/.test(fmt)) {
+    fmt = fmt.replace(RegExp.$1, (getDate.getFullYear() + '').substr(4 - RegExp.$1.length));
+  }
+  for (let k in o) {
+    if (new RegExp('(' + k + ')').test(fmt)) {
+      fmt = fmt.replace(RegExp.$1, (RegExp.$1.length === 1) ? (o[k]) : (('00' + o[k]).substr(('' + o[k]).length)));
+    }
+  }
+  return fmt;
+}
+

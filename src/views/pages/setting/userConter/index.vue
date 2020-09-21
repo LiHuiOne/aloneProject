@@ -8,6 +8,7 @@
 <script>
 import searchData from './mixin/search'
 import tableData from './mixin/table'
+import {dateconvert,getTime,formatDate} from '@/units/date.js'
 export default {
   mixins:[searchData,tableData],
   data(){
@@ -16,6 +17,9 @@ export default {
   },
   components:{
     'search-group':()=>import("@/components/searchGroup/search-group")
+  },
+  mounted(){
+    
   },
   methods:{
 
