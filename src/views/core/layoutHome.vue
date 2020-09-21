@@ -17,12 +17,12 @@
         </div>
         <aside-left :menus="menus" :asideWidth="asideWidth"></aside-left>
       </div>
-      <div class="container_right" :style="{left:aisdeCollape?leftAsideWidth:asideWidth}">
+      <div class="container_right" :style="{left:aisdeCollape?leftAsideWidth:asideWidth}" :class="aisdeCollape?dContainser:zContainser">
         <div class="header_menu" v-if="menuList.length>0">
           <header-menu></header-menu>
         </div>
+          <router-view></router-view>
         
-        <router-view></router-view>
       </div>
     </div>
      
@@ -37,7 +37,9 @@ export default {
     return {
       asideWidth:'190',
       menus:[],
-      imgSrc:require("@/assets/images/lg-logo.png")
+      imgSrc:require("@/assets/images/lg-logo.png"),
+      zContainser:'zmain_container',
+      dContainser:'dmain_container'
     }
   },
   components:{
@@ -127,9 +129,15 @@ export default {
           }
         }
       }
+      .zmain_container{
+        width: calc(100% - 218px);
+      }
+      .dmain_container{
+        width: calc(100% - 98px);
+      }
       .container_right{
         //calc(100% - 0px)这样设置宽度是让当侧边栏收缩的时候右边的宽度还是占右面100%
-        width: calc(100% - 0px);
+        //width: calc(100% - 0px);
         padding:10px 14px;
         // height: 100%;
         //动态主页面背景颜色，默认是$background-color-theme1
