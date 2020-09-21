@@ -25,24 +25,26 @@ export default {
                     placeholder:'请选择'
                 },
                 {
-                    key:'date',
+                    key:['startTime','endTime'],
                     label:'时间',
                     type:'date',
                     placeholder:'请选择日期',
-                    value:['00:00:00','23:59:59']
                 },
                 {
-                    key:'month',
+                    key:['startMouth','endMouth'],
                     label:'月份',
                     type:'month',
                     placeholder:'请选择月份',
-                    value:''
+                    startTime:'',
+                    endTime:''
                 },
                 {
-                    key:'ydate',
+                    key:['startDate','endDate'],
                     label:'日期',
                     type:'ydate',
-                    placeholder:'选择日期'
+                    placeholder:'选择日期',
+                    startTime:'',
+                    endTime:''
                 },
                 {
                     key:'keyId',
