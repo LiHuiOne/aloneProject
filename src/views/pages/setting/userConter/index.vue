@@ -4,7 +4,12 @@
       <search-group ref="searchForm" :initData="searchData" @search="getData"></search-group>
     </div>
     <div class="main_tab">
-        <el-table :data="tableData" border align="center">
+        <el-table 
+        :data="tableData"
+        :header-cell-style="{
+          'background-color': '#f0f0f0',
+          'border-bottom': '1px RGBA(199, 199, 199, 1) solid'
+        }">
           <template v-for="item in tableColumn">
             <el-table-column
              :label="item.label"
@@ -25,6 +30,15 @@
             </template>
           </el-table-column>
         </el-table>
+         <el-pagination
+          v-if="tableData.length>0"
+          @size-change="getData"
+          @current-change="getData"
+          :current-page.sync="currentPage"
+          :page-size="10"
+          layout="prev, pager, next, jumper"
+          :total="paBar.total">
+      </el-pagination>
     </div>
   </div>
 </template>
@@ -40,7 +54,13 @@ export default {
       tableData:[
         {codeId:'001',userName:'测试',age:20,address:'浙江省下城隼目科技',conPer:'小灰灰',work:'前端开发',roleName:'法师'},
         {codeId:'002',userName:'测试',age:20,address:'浙江省下城隼目科技',conPer:'小灰灰',work:'前端开发',roleName:'刺客'}
-      ]
+      ],
+      paBar:{
+        pageNum:1,
+        pageSize:100,
+        total:100
+      },
+      currentPage: 1,
     }
   },
   components:{
@@ -52,15 +72,24 @@ export default {
   methods:{
     getData(){
       const form = this.$refs.searchForm ? this.$refs.searchForm.getFormData() : {};
-      console.log(form)
+      const params = {
+        pageNum:this.currentPage,
+        pageSize: 10
+      }
+      // const data = await this.$api.postCustomersList({...params,...form});
+      // this.loading = false;
+      // if (data.success) {
+      //     this.tableData = data.datas.content;
+      //     this.pagebar = {
+      //       total: data.datas.total,
+      //       pageSize: data.datas.pageSize
+      //     };
+      // }
     }
   }
 };
 </script>
 
 <style lang="scss">
-  .main_tab{
-    width: 100%;
-
-  }
+  
 </style>

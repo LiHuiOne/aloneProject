@@ -159,3 +159,11 @@ html,body {
 .el-button--text{
     color:#f36c28 !important;
 }
+//表透
+.el-table thead{
+    color:#484F62 !important;
+}
+//分页的样式
+.el-pager li.active,.el-pager li:hover {
+    color:#f36c28 !important;
+}

@@ -12,3 +12,22 @@
       height: 110% !important;  //隐藏底部滚动条  （100%如果达不到效果可以试着用110%）   
   }
 }
+//表格的分页样式
+.main_tab{
+  width: 100%;
+  .el-pagination__jump{
+    .el-input{
+      width: 50px !important;
+      .el-input__inner{
+        height: 28px !important;
+      }
+    }
+  }
+  .el-pagination{
+    float: right;
+  }
+}
+.el-icon-arrow-left:hover,.el-icon-arrow-right:hover{
+  color:#f36c28 !important;
+}
+//表格分页样式结束
