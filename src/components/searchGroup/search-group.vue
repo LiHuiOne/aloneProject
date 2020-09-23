@@ -44,6 +44,8 @@
             //将传递的搜索条件暂存
             initSearch(){
                 this.dataList=this.initData.map(v=>{
+                    //判断this.formData里是否具有key属性，没有的话则添加key属性并且赋空值
+                    //注意：刚加载进来都没有
                     if(this.formData[v.key]==''||this.formData[v.key]==null){
                         this.$set(this.formData,v.key,v.value||'')
                     }

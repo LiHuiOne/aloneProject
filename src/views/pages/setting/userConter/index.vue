@@ -20,12 +20,9 @@
              :formatter="item.formatter"
             />
           </template>
-           <el-table-column
-            fixed="right"
-            label="操作"
-            width="100">
-            <template slot-scope="scope">
-              <el-button type="text" size="small">查看</el-button>
+           <el-table-column fixed="right" label="操作" width="100">
+            <template slot-scope="{row}">
+              <el-button type="text" size="small" @click="showDetail(row)">查看</el-button>
               <el-button type="text" size="small">编辑</el-button>
             </template>
           </el-table-column>
@@ -40,12 +37,15 @@
           :total="paBar.total">
       </el-pagination>
     </div>
+    <dialog-info :title="'详情'" :diaStatus="diaStatus" :diaData="diaData" @closeDia="closeDia"></dialog-info>
   </div>
+  
 </template>
 
 <script>
 import searchData from './mixin/search'
 import tableColumn from './mixin/table'
+import dialogData from './mixin/dialog'
 export default {
   mixins:[searchData,tableColumn],
   data(){
@@ -61,13 +61,19 @@ export default {
         total:100
       },
       currentPage: 1,
+      diaStatus:false,
+      diaData:[]
     }
   },
   components:{
-    'search-group':()=>import("@/components/searchGroup/search-group")
+    'search-group':()=>import("@/components/searchGroup/search-group"),
+    'dialog-info':()=>import("@/components/dialog")
+  },
+  computed:{
+   
   },
   mounted(){
-
+    this.diaData=dialogData
   },
   methods:{
     getData(){
@@ -76,6 +82,7 @@ export default {
         pageNum:this.currentPage,
         pageSize: 10
       }
+      console.log(form)
       // const data = await this.$api.postCustomersList({...params,...form});
       // this.loading = false;
       // if (data.success) {
@@ -85,11 +92,23 @@ export default {
       //       pageSize: data.datas.pageSize
       //     };
       // }
+    },
+    showDetail(data){
+      this.diaStatus=true
+    },
+    closeDia(data){
+      this.diaStatus=false
+      if(data){
+        console.log(data)
+      } 
+      window.location.reload()
     }
   }
 };
 </script>
 
 <style lang="scss">
-  
+  .search{
+    display: flex;
+  }
 </style>

@@ -159,11 +159,32 @@ html,body {
 .el-button--text{
     color:#f36c28 !important;
 }
-//表透
+//表头
 .el-table thead{
     color:#484F62 !important;
 }
 //分页的样式
 .el-pager li.active,.el-pager li:hover {
     color:#f36c28 !important;
+}
+//弹框样式
+.el-dialog{
+    .el-dialog__header{
+        background-color: #f36c28;
+        padding:15px 8px 10px;
+        .el-dialog__title{
+            color:#ffffff;
+        }
+        .el-dialog__headerbtn .el-dialog__close{
+            color:#ffffff;
+        }
+       
+    }
+    .el-dialog__footer{
+        .el-button:focus, .el-button:hover{
+            color:#ffffff;
+            background-color:#f36c28;
+            border-color: #f36c28 !important;
+        }
+    }
 }
