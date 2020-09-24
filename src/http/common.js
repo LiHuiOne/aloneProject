@@ -7,6 +7,18 @@ const getCity = data => {
     data
   });
 };
+const upLoadImg = data =>{
+  return{
+    headers: {
+      'Content-Type': 'multipart/form-data'
+    },
+    url:'/api/minio/upload',
+    method:'post',
+    data
+  }
+
+}
 export default {
-  getCity
+  getCity,
+  upLoadImg
 };

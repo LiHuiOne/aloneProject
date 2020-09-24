@@ -5,6 +5,7 @@
         :close-on-click-modal="false"
         @closed="colsedDia"
         width="40%"
+        class="dia_continer"
         >
         <div class="form_Container">
             <el-form ref="form" :model="formData" label-width="80px">
@@ -19,17 +20,28 @@
                     </el-date-picker>
                     <el-date-picker v-else-if="item.type=='ydate'" value-format="yyyy-MM-dd" v-model="formData[item.key]" type="daterange" range-separator="至" start-placeholder="开始日期" end-placeholder="结束日期">
                     </el-date-picker>
-                    <!-- 多选框只能是绑定数组 -->
-                    <el-checkbox-group ref='checkDom' v-else-if="item.type=='checkbox'" v-model="item.key">
+                    <!-- 多选框只能是绑定数组,绑定空数组，解决关闭弹框的时候选中项不取消问题 -->
+                    <el-checkbox-group ref='checkDom' v-else-if="item.type=='checkbox'" v-model="checkBoxItem">
                     <el-checkbox v-for="(cheItem,index) in item.option" :key="index" :label="cheItem.value" name="type">{{cheItem.label}}</el-checkbox>
                     </el-checkbox-group>
                     <el-radio-group v-else-if="item.type=='radio'" v-model="formData[item.key]">
                         <!-- 单选将:label="itemRadio.value"获取绑定的value值 -->
                         <el-radio v-for="(itemRadio,index) in item.option" :key="index" :label="itemRadio.value">{{itemRadio.label}}</el-radio>
                     </el-radio-group>
-                    <el-upload v-else-if="item.type=='image'" drag action="https://jsonplaceholder.typicode.com/posts/">
-                        <img :src="imgSrc">
-                    </el-upload>
+                    <div class="uploadImg" v-else-if="item.type=='image'">
+                        <el-upload
+                            action=""
+                            :on-success="handSccess"
+                            :before-upload="beforeLoad">
+                            <!-- <img :src="imgSrc"> -->
+                            <span class="imgcontainer" v-if="imgSrc==''">
+                                <i class="el-icon-upload"></i>
+                                <p class="el-upload__text"><em>点击上传</em></p>
+                            </span>
+                            <img v-else :src="imgSrc" alt="">
+                        </el-upload>
+                    </div>
+                    
                     <el-input v-else-if="item.type=='textarea'" type="textarea" v-model="formData[item.key]"></el-input>
                     <el-input v-else v-model="formData[item.key]" placeholder="请输入"></el-input>
                 </el-form-item>
@@ -50,7 +62,9 @@
                 formData:{},
                 formItemList:[],
                 formLabelList:[],
-                imgSrc:'https://upload.jianshu.io/users/upload_avatars/3773740/6f9ab33e5572.jpeg?imageMogr2/auto-orient/strip|imageView2/1/w/90/h/90/format/webp'
+                checkBoxItem:[],
+                fileList:[],
+                imgSrc:''
             }
             
         },
@@ -70,7 +84,7 @@
             initDialog(){
                 this.formLabelList=this.diaData.map(item=>{
                     //判断this.formData里是否具有key属性，没有的话则添加key属性并且赋空值
-                    //注意：刚加载进来都没有
+                    //注意：刚加载进来都没有,作用是与表单里相对应
                     if(this.formData[item.key]==''||this.formData[item.key]==null){
                         this.$set(this.formData,item.key,item.value||'')
                         
@@ -78,10 +92,29 @@
                     return item
                 })
             },
+            async handUpload(fileList){
+                const param = new FormData();
+                fileList.forEach(item=>{
+                     param.append("file", item.raw);
+                })
+                console.log(this.fileList)
+                // 本例子主要要在请求时添加特定属性，所以要用自己方法覆盖默认的action
+                var reData=await this.$api.upLoadImg(param)
+                console.log(reData)
+            },
+            beforeLoad(){
+                this.imgSrc='https://upload.jianshu.io/users/upload_avatars/18058665/06ec2d9d-4427-4d63-ad02-34c4243b2e01?imageMogr2/auto-orient/strip|imageView2/1/w/80/h/80/format/webp'
+            },
+            handSccess(res,fileList){
+                console.log("000")
+                this.imgSrc='https://upload.jianshu.io/users/upload_avatars/18058665/06ec2d9d-4427-4d63-ad02-34c4243b2e01?imageMogr2/auto-orient/strip|imageView2/1/w/80/h/80/format/webp'
+                this.fileList=fileList
+                console.log(fileList)
+                //this.imgSrc = URL.createObjectURL(file.raw);
+            },
             colsedDia(){
                 this.dialogVisible=false
                 this.formData={};
-                this.formItemList=[];
                 this.$emit('closeDia')
             },
             confirmDia(){
@@ -114,7 +147,9 @@
                             //
                             this.$set(formData,'checkList',checkList)
                         }
-                    } 
+                    }else if(item.type=='image'){
+                        this.$set(formData,'imgSrc',this.imgSrc)
+                    }
                     else {//文本和单选
                         formData[item.key] = this.formData[item.key] || parseInt(this.formData[item.key]) === 0 ? this.formData[item.key] : null
                     }
@@ -125,6 +160,45 @@
     }
 </script>
 
-<style scoped>
-
+<style lang='scss'>
+    .dia_continer{
+        .el-dialog{
+            .el-dialog__body{
+                height: 500px;
+                overflow: hidden;
+                overflow-y: auto;
+                .uploadImg{
+        width: 120px;
+        height: 120px;
+        border: 1px solid gray;
+        border-style: dashed;
+        :nth-child(1){
+            width: 100%;
+            .el-upload{
+                .imgcontainer{
+                    .el-icon-upload{
+                        font-size: 80px;
+                        color: #f0f0f0;
+                    }
+                    .el-upload__text{
+                        color: #796a6a;
+                    }
+                }
+                ul{
+                    display: none;
+                }
+            }
+        }
+        img{
+            width: 100%;
+            height: 100%;
+        }
+        
+    }
+            }
+        }
+        
+        
+    }
+    
 </style>

@@ -20,10 +20,11 @@
              :formatter="item.formatter"
             />
           </template>
-           <el-table-column fixed="right" label="操作" width="100">
+           <el-table-column fixed="right" label="操作" width="120">
             <template slot-scope="{row}">
+              <el-button type="text" size="small" @click="showDetail(row)">添加</el-button>
               <el-button type="text" size="small" @click="showDetail(row)">查看</el-button>
-              <el-button type="text" size="small">编辑</el-button>
+              <el-button type="text" size="small" @click="showDetail(row)">修改</el-button>
             </template>
           </el-table-column>
         </el-table>
@@ -37,7 +38,7 @@
           :total="paBar.total">
       </el-pagination>
     </div>
-    <dialog-info :title="'详情'" :diaStatus="diaStatus" :diaData="diaData" @closeDia="closeDia"></dialog-info>
+    <dialog-info v-if="isRouterActive" :title="'详情'" :diaStatus="diaStatus" :diaData="diaData" @closeDia="closeDia"></dialog-info>
   </div>
   
 </template>
@@ -48,8 +49,10 @@ import tableColumn from './mixin/table'
 import dialogData from './mixin/dialog'
 export default {
   mixins:[searchData,tableColumn],
+  inject:['reload'],
   data(){
     return{
+      isRouterActive:true,
       loading:false,
       tableData:[
         {codeId:'001',userName:'测试',age:20,address:'浙江省下城隼目科技',conPer:'小灰灰',work:'前端开发',roleName:'法师'},
@@ -101,7 +104,8 @@ export default {
       if(data){
         console.log(data)
       } 
-      window.location.reload()
+      this.reload()
+      // window.location.reload()
     }
   }
 };

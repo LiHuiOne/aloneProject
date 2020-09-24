@@ -26,7 +26,7 @@ const dialogData = [
         ]
     },
     {
-        key: [],
+        key:[],//多选框可以这样写，已在组建中做处理
         label: '活动',
         type: 'checkbox',
         option: [

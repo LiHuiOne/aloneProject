@@ -188,3 +188,12 @@ html,body {
         }
     }
 }
+//单选框
+.el-radio__inner:hover{
+    border-color:#f36c28 !important;
+}
+.el-radio__input.is-checked .el-radio__inner{
+    border-color:#f36c28 !important;
+    background-color: #f36c28 !important;
+}
+

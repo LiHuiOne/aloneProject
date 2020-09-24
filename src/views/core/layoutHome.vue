@@ -21,7 +21,7 @@
         <div class="header_menu" v-if="menuList.length>0">
           <header-menu></header-menu>
         </div>
-          <router-view></router-view>
+          <router-view v-if="isRouterActive"></router-view>
         
       </div>
     </div>
@@ -33,8 +33,14 @@
 <script>
  import {mapGetters, mapMutations, mapState} from 'vuex'
 export default {
+  provide(){
+    return{
+      reload:this.reload
+    }
+  },
   data(){
     return {
+      isRouterActive:true,
       asideWidth:'190',
       menus:[],
       imgSrc:require("@/assets/images/lg-logo.png"),
@@ -62,6 +68,12 @@ export default {
     this.menus=menusList.filter(item=>item.path!="/home/default")
   },
   methods:{
+    reload(){
+      this.isRouterActive=false;
+      this.$nextTick(()=>{
+        this.isRouterActive=true
+      })
+    },
     //点击图标进行菜单缩放
     ...mapMutations(['TOOGLE_ASIDE','DELETE_ALLMENU']),
     toggleAside(){
