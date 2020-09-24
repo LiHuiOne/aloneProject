@@ -111,6 +111,9 @@ html,body {
     background-color:#f36c28 !important;
     color:#ffffff !important;
 }
+.el-select-dropdown__item.selected{
+    color:#f36c28 !important;
+}
 //element-ui中滚动条样式,外层的块级元素必须设置高，并且不能是el-card的直接子元素
 // .el-scrollbar{
 //     height: 100%;
@@ -152,6 +155,10 @@ html,body {
 .el-date-table td.start-date span,.el-date-table td.end-date span{
     background-color: #f36c28 !important;
     color:#ffffff !important;
+}
+//时间选择样式
+.el-time-panel__btn.confirm{
+    color:#f36c28 !important;
 }
 // .el-date-table td.today span, .el-date-table td.today span{
 //     color:#ffffff !important;
@@ -195,5 +202,8 @@ html,body {
 .el-radio__input.is-checked .el-radio__inner{
     border-color:#f36c28 !important;
     background-color: #f36c28 !important;
+}
+.el-radio__input.is-checked+.el-radio__label{
+    color: #f36c28 !important;
 }
 

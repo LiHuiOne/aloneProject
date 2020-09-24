@@ -22,9 +22,9 @@
           </template>
            <el-table-column fixed="right" label="操作" width="120">
             <template slot-scope="{row}">
-              <el-button type="text" size="small" @click="showDetail(row)">添加</el-button>
-              <el-button type="text" size="small" @click="showDetail(row)">查看</el-button>
-              <el-button type="text" size="small" @click="showDetail(row)">修改</el-button>
+              <el-button type="text" size="small" @click="showDetail(row,1)">添加</el-button>
+              <el-button type="text" size="small" @click="showDetail(row,2)">查看</el-button>
+              <el-button type="text" size="small" @click="showDetail(row,3)">修改</el-button>
             </template>
           </el-table-column>
         </el-table>
@@ -38,7 +38,8 @@
           :total="paBar.total">
       </el-pagination>
     </div>
-    <dialog-info v-if="isRouterActive" :title="'详情'" :diaStatus="diaStatus" :diaData="diaData" @closeDia="closeDia"></dialog-info>
+    <!-- 添加v-if的原因：阻止子组件在父组件上加载的时渲染，以防子组件操作时获取不到填写的数据 -->
+    <dialog-info v-if="diaStatus==true" :title="title" :diaStatus="diaStatus" :diaData="diaData" :deInfo="detailInfo" @closeDia="closeDia"></dialog-info>
   </div>
   
 </template>
@@ -47,12 +48,13 @@
 import searchData from './mixin/search'
 import tableColumn from './mixin/table'
 import dialogData from './mixin/dialog'
+import detailData from './mixin/detail_dialog'
+import modifyData from './mixin/modify-dialog'
 export default {
   mixins:[searchData,tableColumn],
-  inject:['reload'],
+  inject:['reload'],//刷新当前组件
   data(){
     return{
-      isRouterActive:true,
       loading:false,
       tableData:[
         {codeId:'001',userName:'测试',age:20,address:'浙江省下城隼目科技',conPer:'小灰灰',work:'前端开发',roleName:'法师'},
@@ -65,7 +67,9 @@ export default {
       },
       currentPage: 1,
       diaStatus:false,
-      diaData:[]
+      diaData:[],
+      detailInfo:{},
+      title:''
     }
   },
   components:{
@@ -75,9 +79,9 @@ export default {
   computed:{
    
   },
-  mounted(){
-    this.diaData=dialogData
-  },
+  // mounted(){
+  //   this.diaData=dialogData
+  // },
   methods:{
     getData(){
       const form = this.$refs.searchForm ? this.$refs.searchForm.getFormData() : {};
@@ -96,14 +100,24 @@ export default {
       //     };
       // }
     },
-    showDetail(data){
+    showDetail(row,type){
       this.diaStatus=true
+      if(type==1){
+        this.title='添加'
+        this.diaData=dialogData
+      }else{
+        this.title=type==2?'查看':'修改'
+        this.diaData=type==2?detailData:modifyData;
+        this.detailInfo={userName:'001',age:2,catory:2,time:'08:02:00',month:'2020-09',date:'2020-09-20',checkedList:[1,2],imgSrc:'https://t11.baidu.com/it/u1=1900852480&u2=4161278891&fm=76',desc:'前端开发'}
+        
+      }
     },
     closeDia(data){
       this.diaStatus=false
       if(data){
         console.log(data)
       } 
+      //刷新当前组件
       this.reload()
       // window.location.reload()
     }
