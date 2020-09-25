@@ -114,7 +114,7 @@ export default {
     },
     closeDia(data){
       this.diaStatus=false
-      if(data){
+      if(data&&this.title!='查看'){
         console.log(data)
       } 
       //刷新当前组件
