@@ -210,3 +210,8 @@ html,body {
 .el-loading-spinner .el-loading-text,.el-loading-spinner i{
     color:#f36c28 !important;
 }
+//viewer：预览层级
+.viewer-container{
+    //设置大与弹框的层级
+    z-index: 4000 !important;
+}

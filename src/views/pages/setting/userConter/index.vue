@@ -24,11 +24,12 @@
              :formatter="item.formatter"
             />
           </template>
-           <el-table-column fixed="right" label="操作" width="120">
+           <el-table-column fixed="right" label="操作" width="160">
             <template slot-scope="{row}">
               <el-button type="text" size="small" @click="showDetail(row,1)">添加</el-button>
               <el-button type="text" size="small" @click="showDetail(row,2)">查看</el-button>
               <el-button type="text" size="small" @click="showDetail(row,3)">修改</el-button>
+              <el-button type="text" size="small" @click="showImg">预览</el-button>
             </template>
           </el-table-column>
         </el-table>
@@ -44,6 +45,24 @@
     </div>
     <!-- 添加v-if的原因：阻止子组件在父组件上加载的时渲染，以防子组件操作时获取不到填写的数据 -->
     <dialog-info v-if="diaStatus==true" :title="title" :diaStatus="diaStatus" :diaData="diaData" :deInfo="detailInfo" @closeDia="closeDia"></dialog-info>
+    <el-dialog
+    class="viwerDia"
+    title="预览"
+    :visible.sync="viwerImgStatus"
+    width="30%"
+    >
+    <el-row :gutter="10">
+      <el-col :span="12">
+        <viewer :images="imagesList">
+        <img v-for="src in imagesList" :src="src" :key="src">
+    </viewer>
+      </el-col>
+    </el-row>
+    <span slot="footer" class="dialog-footer">
+      <el-button @click="viwerImgStatus = false">取 消</el-button>
+      <el-button type="primary" @click="viwerImgStatus = false">确 定</el-button>
+    </span>
+</el-dialog>
   </div>
   
 </template>
@@ -73,7 +92,9 @@ export default {
       diaStatus:false,
       diaData:[],
       detailInfo:{},
-      title:''
+      title:'',
+      viwerImgStatus:false,
+      imagesList:['https://t11.baidu.com/it/u1=1900852480&u2=4161278891&fm=76','https://dss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=1603365312,3218205429&fm=26&gp=0.jpg']
     }
   },
   components:{
@@ -86,7 +107,7 @@ export default {
   mounted(){
     setTimeout(() => {
       this.loading=false
-    }, 2000);
+    }, 500);
   },
   methods:{
     getData(){
@@ -106,6 +127,9 @@ export default {
       //     };
       // }
     },
+    showImg(){
+      this.viwerImgStatus=true
+    },
     showDetail(row,type){
       this.diaStatus=true
       if(type==1){
@@ -115,6 +139,7 @@ export default {
         this.title=type==2?'查看':'修改'
         this.diaData=type==2?detailData:modifyData;
         this.detailInfo={userName:'001',age:2,catory:2,time:'08:02:00',month:'2020-09',date:'2020-09-20',checkedList:[1,2],imgSrc:'https://t11.baidu.com/it/u1=1900852480&u2=4161278891&fm=76',desc:'前端开发'}
+        //this.detailInfo={userName:'001',age:2,catory:2,time:'08:02:00',month:'2020-09',date:'2020-09-20',checkedList:[1,2],imgSrc:['https://t11.baidu.com/it/u1=1900852480&u2=4161278891&fm=76'],desc:'前端开发'}
         
       }
     },
@@ -134,5 +159,19 @@ export default {
 <style lang="scss">
   .search{
     display: flex;
+  }
+  .imgViewerContainer{
+    position:absolute;
+    margin:100px auto;
+  }
+  .viwerDia{
+    .el-dialog__body{
+      height: 120px;
+      img{
+        margin:5px 10px;
+        height: 100px;
+        width: 100px;
+      }
+    }
   }
 </style>
