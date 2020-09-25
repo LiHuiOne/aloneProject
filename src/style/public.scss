@@ -206,4 +206,7 @@ html,body {
 .el-radio__input.is-checked+.el-radio__label{
     color: #f36c28 !important;
 }
-
+//加载loading
+.el-loading-spinner .el-loading-text,.el-loading-spinner i{
+    color:#f36c28 !important;
+}

@@ -5,7 +5,11 @@
     </div>
     <div class="main_tab">
         <el-table 
-        :data="tableData"
+        v-loading="loading"
+        element-loading-text="拼命加载中"
+      element-loading-spinner="el-icon-loading"
+      element-loading-background="rgba(0, 0, 0, 0.2)"
+          :data="tableData"
         :header-cell-style="{
           'background-color': '#f0f0f0',
           'border-bottom': '1px RGBA(199, 199, 199, 1) solid'
@@ -55,7 +59,7 @@ export default {
   inject:['reload'],//刷新当前组件
   data(){
     return{
-      loading:false,
+      loading:true,
       tableData:[
         {codeId:'001',userName:'测试',age:20,address:'浙江省下城隼目科技',conPer:'小灰灰',work:'前端开发',roleName:'法师'},
         {codeId:'002',userName:'测试',age:20,address:'浙江省下城隼目科技',conPer:'小灰灰',work:'前端开发',roleName:'刺客'}
@@ -79,9 +83,11 @@ export default {
   computed:{
    
   },
-  // mounted(){
-  //   this.diaData=dialogData
-  // },
+  mounted(){
+    setTimeout(() => {
+      this.loading=false
+    }, 2000);
+  },
   methods:{
     getData(){
       const form = this.$refs.searchForm ? this.$refs.searchForm.getFormData() : {};
