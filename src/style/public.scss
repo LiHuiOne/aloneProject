@@ -215,3 +215,52 @@ html,body {
     //设置大与弹框的层级
     z-index: 4000 !important;
 }
+//树形控件图标以及样式
+.el-tree-node__content{
+    height:24px;
+    &:hover{
+        background: none;
+    }
+    .el-tree-node__label{
+        padding-left:18px;
+        // 引用背景图使用~@
+        background-image: url('~@/assets/images/tree/list_client_one.png');
+        background-repeat: no-repeat;
+        background-position: center left;
+        font-size: 12px;
+        color: #333333;
+        padding-top: 2px;
+        padding-bottom: 2px;
+        padding-right: 4px;
+    }
+}
+.el-tree-node__expand-icon.el-icon-caret-right{
+    background-image: url("~@/assets/images/tree/list_client_add.png");
+    background-repeat: no-repeat;
+    background-position: center;
+    padding: 2px;
+    color: transparent;
+    &.expanded{
+        background-image: url("~@/assets/images/tree/list_client_rem.png");
+        transform: rotate(0);
+    }
+    &.is-leaf{
+        background: none;
+    }
+}
+.el-tree-node:focus{
+    .el-tree-node__content{
+        background: none;
+    }
+}
+.el-tree--highlight-current{
+    .el-tree-node.is-current{
+        &>.el-tree-node__content{
+            background:none;
+            .el-tree-node__label{
+                border: 1px solid #f36c28;
+                background-color: rgba(250,100,0,0.15);
+            }
+        }
+    }
+}
