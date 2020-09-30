@@ -91,6 +91,7 @@ module.exports = {
     https: false, // https:{type:Boolean}
     open: true, // 配置自动启动浏览器
     //配置多个代理的话，直接在proxy写就可以
+    productionSourceMap: false,//打包时去掉map文件
     proxy: {
       "/api/*": {
         target: "http://192.168.2.221:8095",
