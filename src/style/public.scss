@@ -223,7 +223,7 @@ html,body {
     }
     .el-tree-node__label{
         padding-left:18px;
-        // 引用背景图使用~@
+        // scss中引用背景图使用~@根路径src
         background-image: url('~@/assets/images/tree/list_client_one.png');
         background-repeat: no-repeat;
         background-position: center left;
