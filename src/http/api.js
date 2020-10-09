@@ -20,6 +20,8 @@ export default function $axios(options) {
         // if (adminToken) {
         //     config.headers['Authorization'] = adminToken
         // }
+        //不走nginx代理的话需要把前面代理去掉
+        //config.url=config.url.replace('/api','');
         return config;
       },
       err => {
