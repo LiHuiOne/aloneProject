@@ -160,6 +160,8 @@ export default {
         @include bg_color($background-color-theme1);
         .header_menu{
           height: 40px;
+          border-bottom: 2px solid gray;
+          margin-bottom: 10px;
           background: #ffffff;
           padding-left: 10px;
           &>div{

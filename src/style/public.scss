@@ -281,3 +281,7 @@ html,body {
 .el-tabs__item:hover{
     color: #f36c28 !important;
 }
+.el-button:focus, .el-button:hover{
+    background-color: #f36c28 !important;
+    color: #ffffff !important;
+}

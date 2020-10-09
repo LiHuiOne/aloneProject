@@ -120,7 +120,7 @@ export default {
   mounted(){
     setTimeout(() => {
       this.loading=false
-    }, 500);
+    }, 1000);
   },
   methods:{
     getData(){
