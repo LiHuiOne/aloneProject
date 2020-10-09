@@ -43,7 +43,7 @@ export default {
       isRouterActive:true,
       asideWidth:'190',
       menus:[],
-      imgSrc:require("@/assets/images/lg-logo.png"),
+      imgSrc:require("@/assets/images/logo.png"),
       zContainser:'zmain_container',
       dContainser:'dmain_container'
     }
