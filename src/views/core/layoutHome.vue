@@ -17,11 +17,11 @@
         </div>
         <aside-left :menus="menus" :asideWidth="asideWidth"></aside-left>
       </div>
-      <div class="container_right" :style="{left:aisdeCollape?leftAsideWidth:asideWidth}" :class="aisdeCollape?dContainser:zContainser">
+      <div class="container_right">
         <div class="header_menu" v-if="menuList.length>0">
           <header-menu></header-menu>
         </div>
-          <router-view v-if="isRouterActive"></router-view>
+        <router-view v-if="isRouterActive"></router-view>
         
       </div>
     </div>
@@ -79,6 +79,7 @@ export default {
     toggleAside(){
       this.TOOGLE_ASIDE(!this.aisdeCollape)
     },
+    //切换主题
     toggleBg(bgColor){
       //console.log(bgColor)
        window.document.documentElement.setAttribute('data-theme',bgColor)
@@ -129,7 +130,6 @@ export default {
       height: 100%;
       display: flex;
       .container_left{
-        // width: 190px;
         .menu_btn{
           height: 40px;
           text-align: center;
@@ -142,14 +142,18 @@ export default {
         }
       }
       .zmain_container{
-        width: calc(100% - 218px);
+        width: calc(100% - 0px);
       }
       .dmain_container{
-        width: calc(100% - 98px);
+        width: calc(100% - 0px);
       }
       .container_right{
+        box-sizing: border-box;
+        //解决溢出出现滚动条
+        overflow: auto;
+        // width: 100%;
         //calc(100% - 0px)这样设置宽度是让当侧边栏收缩的时候右边的宽度还是占右面100%
-        //width: calc(100% - 0px);
+        width: calc(100% - 0px);
         padding:10px 14px;
         // height: 100%;
         //动态主页面背景颜色，默认是$background-color-theme1
