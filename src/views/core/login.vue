@@ -8,7 +8,7 @@
         <el-input v-model="form.account"></el-input>
       </el-form-item>
       <el-form-item label="密码" prop="pwd">
-        <el-input v-model="form.pwd"></el-input>
+        <el-input  type="password" v-model="form.pwd"></el-input>
       </el-form-item>
       <el-form-item label="验证码" prop="code">
         <el-row>
@@ -64,6 +64,16 @@ export default {
   created(){
     this.getCode()
   },
+  mounted(){
+    this.form.account = localStorage.getItem('loginAccount') || ''
+    this.form.pwd =localStorage.getItem('loginPwd') || ''
+    if(localStorage.getItem('loginAccount')){
+      this.$set(this.form,'saveAcount',true)
+    }
+    if(localStorage.getItem('loginPwd')){
+      this.$set(this.form,'savePwd',true)
+    }
+  },
   methods: {
     ...mapActions(['Login']),
     ...mapMutations(['TOOGLE_ASIDE']),
@@ -81,10 +91,21 @@ export default {
       };
       this.$refs['loginForm'].validate((valid) => {
         if(valid){
+            if(this.form.saveAcount){
+              localStorage.setItem('loginAccount',this.form.account)
+            }else{
+                localStorage.removeItem('loginAccount')
+            }
+            if(this.form.savePwd){
+              localStorage.setItem('loginPwd', this.form.pwd)
+            }else{
+              localStorage.removeItem('loginPwd')
+            }
             Login(params)
             .then((res)=>{
               if(res.success){
                 localStorage.setItem('userInfo','islogin')
+
                 this.$router.push({name:'index'})
               }
             })
@@ -99,7 +120,11 @@ export default {
       return encrypt.encrypt(data);
     },
     getCode(){
+      //获取时间戳
       var timestamp = new Date().valueOf();
+      let url=process.env.VUE_APP_URL
+      //打包时修改
+      //this.src=`${url}login/code?` + timestamp
       this.src = "/api/login/code?" + timestamp;
     }
   }
