@@ -4,8 +4,11 @@ import { Message } from "element-ui";
 import { isString } from "util";
 //配置请求和响应拦截器(axios的二次封装)
 export default function $axios(options) {
+  //可以设置读取配置打包的环境
+  //const API_URL = process.env.VUE_APP_URL;
   return new Promise((resolve, reject) => {
     const instance = axios.create({
+      //baseURL: API_URL,
       baseURL: config.baseURL,
       headers: config.headers
     });
