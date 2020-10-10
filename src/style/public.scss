@@ -281,7 +281,12 @@ html,body {
 .el-tabs__item:hover{
     color: #f36c28 !important;
 }
-.el-button:focus, .el-button:hover{
-    background-color: #f36c28 !important;
-    color: #ffffff !important;
+.el-message-box{
+    .el-button:focus, .el-button:hover{
+        background-color: #f36c28 !important;
+        color: #ffffff !important;
+    }
+    .el-message-box__headerbtn:focus .el-message-box__close, .el-message-box__headerbtn:hover .el-message-box__close{
+        color: #f36c28 !important;
+    }
 }
